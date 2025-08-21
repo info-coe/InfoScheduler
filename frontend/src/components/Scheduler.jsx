@@ -32,7 +32,7 @@ const StatusBadge = ({ status, children }) => {
     stopped: 'bg-red-100 text-red-800',
     pending: 'bg-blue-100 text-blue-800'
   };
-  
+
   return (
     <span className={`px-3 py-1 rounded-full text-sm font-medium ${colors[status] || 'bg-gray-100 text-gray-800'}`}>
       {children}
@@ -67,7 +67,7 @@ const JobForm = ({ onJobCreated, availableFunctions }) => {
         args: formData.args ? JSON.parse(`[${formData.args}]`) : [],
         kwargs: formData.kwargs ? JSON.parse(formData.kwargs) : {}
       };
-      
+
       if (formData.func_name === 'custom_code') {
         jobData.custom_code = formData.custom_code;
       }
@@ -107,7 +107,7 @@ const JobForm = ({ onJobCreated, availableFunctions }) => {
         <Calendar className="w-5 h-5 text-blue-600" />
         Schedule New Job
       </h2>
-      
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -117,18 +117,18 @@ const JobForm = ({ onJobCreated, availableFunctions }) => {
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="e.g., Daily Email Report"
             />
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Function</label>
             <select
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               value={formData.func_name}
-              onChange={(e) => setFormData({...formData, func_name: e.target.value})}>
+              onChange={(e) => setFormData({ ...formData, func_name: e.target.value })}>
               <option value="">Select Function</option>
               {availableFunctions.map(func => (
                 <option key={func.name} value={func.name}>
@@ -146,7 +146,7 @@ const JobForm = ({ onJobCreated, availableFunctions }) => {
               rows={6}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
               value={formData.custom_code}
-              onChange={(e) => setFormData({...formData, custom_code: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, custom_code: e.target.value })}
               placeholder="import datetime&#10;import json&#10;&#10;def my_function():&#10;    result = {'status': 'success', 'timestamp': datetime.datetime.now().isoformat()}&#10;    return result&#10;&#10;result = my_function()"
             />
           </div>
@@ -159,7 +159,7 @@ const JobForm = ({ onJobCreated, availableFunctions }) => {
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               value={formData.trigger_type}
-              onChange={(e) => setFormData({...formData, trigger_type: e.target.value})}>
+              onChange={(e) => setFormData({ ...formData, trigger_type: e.target.value })}>
               <option value="">Select Trigger</option>
               <option value="interval">Interval (Repeat every X seconds)</option>
               <option value="cron">Cron (Schedule at specific times)</option>
@@ -174,7 +174,7 @@ const JobForm = ({ onJobCreated, availableFunctions }) => {
               min="1"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               value={formData.max_instances}
-              onChange={(e) => setFormData({...formData, max_instances: parseInt(e.target.value)})}
+              onChange={(e) => setFormData({ ...formData, max_instances: parseInt(e.target.value) })}
             />
           </div>
         </div>
@@ -193,7 +193,7 @@ const JobForm = ({ onJobCreated, availableFunctions }) => {
                   value={triggerConfig.interval.seconds}
                   onChange={(e) => setTriggerConfig({
                     ...triggerConfig,
-                    interval: {...triggerConfig.interval, seconds: parseInt(e.target.value)}
+                    interval: { ...triggerConfig.interval, seconds: parseInt(e.target.value) }
                   })}
                 />
               </div>
@@ -205,7 +205,7 @@ const JobForm = ({ onJobCreated, availableFunctions }) => {
                   className="w-full px-3 py-2 border border-blue-300 rounded focus:ring-2 focus:ring-blue-500"
                   onChange={(e) => setTriggerConfig({
                     ...triggerConfig,
-                    interval: {...triggerConfig.interval, minutes: parseInt(e.target.value) || undefined}
+                    interval: { ...triggerConfig.interval, minutes: parseInt(e.target.value) || undefined }
                   })}
                 />
               </div>
@@ -227,7 +227,7 @@ const JobForm = ({ onJobCreated, availableFunctions }) => {
                   value={triggerConfig.cron.hour}
                   onChange={(e) => setTriggerConfig({
                     ...triggerConfig,
-                    cron: {...triggerConfig.cron, hour: parseInt(e.target.value)}
+                    cron: { ...triggerConfig.cron, hour: parseInt(e.target.value) }
                   })}
                 />
               </div>
@@ -241,7 +241,7 @@ const JobForm = ({ onJobCreated, availableFunctions }) => {
                   value={triggerConfig.cron.minute}
                   onChange={(e) => setTriggerConfig({
                     ...triggerConfig,
-                    cron: {...triggerConfig.cron, minute: parseInt(e.target.value)}
+                    cron: { ...triggerConfig.cron, minute: parseInt(e.target.value) }
                   })}
                 />
               </div>
@@ -251,7 +251,7 @@ const JobForm = ({ onJobCreated, availableFunctions }) => {
                   className="w-full px-3 py-2 border border-green-300 rounded focus:ring-2 focus:ring-green-500"
                   onChange={(e) => setTriggerConfig({
                     ...triggerConfig,
-                    cron: {...triggerConfig.cron, day_of_week: e.target.value || undefined}
+                    cron: { ...triggerConfig.cron, day_of_week: e.target.value || undefined }
                   })}>
                   <option value="">Any day</option>
                   <option value="0">Sunday</option>
@@ -279,7 +279,7 @@ const JobForm = ({ onJobCreated, availableFunctions }) => {
                 className="w-full px-3 py-2 border border-purple-300 rounded focus:ring-2 focus:ring-purple-500"
                 onChange={(e) => setTriggerConfig({
                   ...triggerConfig,
-                  date: {run_date: e.target.value}
+                  date: { run_date: e.target.value }
                 })}
               />
             </div>
@@ -293,18 +293,18 @@ const JobForm = ({ onJobCreated, availableFunctions }) => {
               type="text"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               value={formData.args}
-              onChange={(e) => setFormData({...formData, args: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, args: e.target.value })}
               placeholder="'Hello', 'World', 123"
             />
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Keyword Arguments (JSON)</label>
             <input
               type="text"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               value={formData.kwargs}
-              onChange={(e) => setFormData({...formData, kwargs: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, kwargs: e.target.value })}
               placeholder='{"key": "value"}'
             />
           </div>
@@ -362,7 +362,7 @@ const JobCard = ({ job, onJobAction }) => {
             <p className="text-sm text-gray-600">{job.func_name.replace('_', ' ')}</p>
           </div>
         </div>
-        
+
         <StatusBadge status={job.pending ? 'pending' : (job.next_run_time ? 'running' : 'stopped')}>
           {job.pending ? 'Pending' : (job.next_run_time ? 'Active' : 'Stopped')}
         </StatusBadge>
@@ -398,25 +398,24 @@ const JobCard = ({ job, onJobAction }) => {
           <Play className="w-3 h-3" />
           Execute Now
         </button>
-        
+
         <button
           onClick={() => onJobAction(job.next_run_time ? 'pause' : 'resume', job.id)}
-          className={`px-3 py-1 rounded-lg transition-colors text-sm flex items-center gap-1 ${
-            job.next_run_time 
-              ? 'bg-yellow-600 text-white hover:bg-yellow-700'
-              : 'bg-green-600 text-white hover:bg-green-700'
-          }`}>
+          className={`px-3 py-1 rounded-lg transition-colors text-sm flex items-center gap-1 ${job.next_run_time
+            ? 'bg-yellow-600 text-white hover:bg-yellow-700'
+            : 'bg-green-600 text-white hover:bg-green-700'
+            }`}>
           {job.next_run_time ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
           {job.next_run_time ? 'Pause' : 'Resume'}
         </button>
-        
+
         <button
           onClick={fetchResults}
           className="px-3 py-1 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm flex items-center gap-1">
           <BarChart3 className="w-3 h-3" />
           Results
         </button>
-        
+
         <button
           onClick={() => onJobAction('delete', job.id)}
           className="px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm flex items-center gap-1">
@@ -433,9 +432,8 @@ const JobCard = ({ job, onJobAction }) => {
               <p className="text-gray-500 text-sm">No execution results yet</p>
             ) : (
               results.slice(-5).reverse().map((result, index) => (
-                <div key={index} className={`p-2 rounded text-xs ${
-                  result.status === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                }`}>
+                <div key={index} className={`p-2 rounded text-xs ${result.status === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                  }`}>
                   <div className="flex justify-between items-start mb-1">
                     <span className="font-medium">{result.status.toUpperCase()}</span>
                     <span>{new Date(result.execution_time).toLocaleString()}</span>
@@ -477,7 +475,7 @@ const SchedulerControls = ({ status, onAction }) => {
             {status?.running ? 'RUNNING' : 'STOPPED'}
           </StatusBadge>
         </div>
-        
+
         {status && (
           <div className="text-sm text-gray-600 space-y-1">
             <div>Jobs: {status.jobs_count}</div>
@@ -497,7 +495,7 @@ const SchedulerControls = ({ status, onAction }) => {
           <Play className="w-4 h-4" />
           Start
         </button>
-        
+
         <button
           onClick={() => onAction('pause')}
           disabled={!status?.running}
@@ -505,14 +503,14 @@ const SchedulerControls = ({ status, onAction }) => {
           <Pause className="w-4 h-4" />
           Pause
         </button>
-        
+
         <button
           onClick={() => onAction('resume')}
           className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
           <RefreshCw className="w-4 h-4" />
           Resume
         </button>
-        
+
         <button
           onClick={() => onAction('shutdown')}
           disabled={!status?.running}
@@ -526,7 +524,7 @@ const SchedulerControls = ({ status, onAction }) => {
 };
 
 // Main App Component
-const APSchedulerApp = () => {
+const Scheduler = () => {
   const [schedulerStatus, setSchedulerStatus] = useState(null);
   const [jobs, setJobs] = useState([]);
   const [availableFunctions, setAvailableFunctions] = useState([]);
@@ -546,7 +544,7 @@ const APSchedulerApp = () => {
         api.getJobs(),
         api.getFunctions()
       ]);
-      
+
       setSchedulerStatus(statusRes);
       setJobs(jobsRes);
       setAvailableFunctions(functionsRes.functions || []);
@@ -577,7 +575,7 @@ const APSchedulerApp = () => {
         default:
           return;
       }
-      
+
       showNotification(response.message || `Scheduler ${action}ed successfully`);
       await fetchData();
     } catch (error) {
@@ -611,7 +609,7 @@ const APSchedulerApp = () => {
         default:
           return;
       }
-      
+
       await fetchData();
     } catch (error) {
       console.error(`Error ${action}ing job:`, error);
@@ -640,9 +638,8 @@ const APSchedulerApp = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Notification */}
       {notification && (
-        <div className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg ${
-          notification.type === 'error' ? 'bg-red-500 text-white' : 'bg-green-500 text-white'
-        }`}>
+        <div className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg ${notification.type === 'error' ? 'bg-red-500 text-white' : 'bg-green-500 text-white'
+          }`}>
           {notification.message}
         </div>
       )}
@@ -686,14 +683,14 @@ const APSchedulerApp = () => {
 
         {/* Controls and Form */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-          <SchedulerControls 
-            status={schedulerStatus} 
-            onAction={handleSchedulerAction} 
+          <SchedulerControls
+            status={schedulerStatus}
+            onAction={handleSchedulerAction}
           />
           <div className="lg:col-span-2">
-            <JobForm 
-              onJobCreated={fetchData} 
-              availableFunctions={availableFunctions} 
+            <JobForm
+              onJobCreated={fetchData}
+              availableFunctions={availableFunctions}
             />
           </div>
         </div>
@@ -719,10 +716,10 @@ const APSchedulerApp = () => {
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
               {jobs.map(job => (
-                <JobCard 
-                  key={job.id} 
-                  job={job} 
-                  onJobAction={handleJobAction} 
+                <JobCard
+                  key={job.id}
+                  job={job}
+                  onJobAction={handleJobAction}
                 />
               ))}
             </div>
@@ -739,4 +736,4 @@ const APSchedulerApp = () => {
   );
 };
 
-export default APSchedulerApp;
+export default Scheduler;
